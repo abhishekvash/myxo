@@ -35,6 +35,7 @@ class Song(models.Model):
     duration = models.TimeField()
     path = models.CharField(max_length=100)
     no_of_plays = models.IntegerField()
+    added_on = models.DateTimeField()
 
     def __str__(self):
         return self.name
