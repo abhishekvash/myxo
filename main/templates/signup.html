@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sign Up</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'css/signup.css' %}"
+      type="text/css"
+    />
+  </head>
+  <body>
+    <div class="container signup">
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-3">
+          <form action="" method="post">
+            <button type="button" class="btn google_auth">
+              Sign Up With <i class="fab fa-google"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      <d class="row justify-content-center">
+        <h3>OR</h3>
+      </d>
+      <form action="" method="post" id="signup-form" class="form-group">
+        <div class="row justify-content-center">
+          <div class="col-sm-12 col-md-3">
+            <input class="form-control" type="text" name="username" id="" /
+            placeholder="Username">
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-sm-12 col-md-3">
+            <input class="form-control" type="email" name="email" id="" /
+            placeholder="Email">
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-sm-12 col-md-3">
+            <input class="form-control" type="password" name="password" id="" /
+            placeholder="Password">
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-sm-12 col-md-3">
+            <input class="form-control" type="password" name="re_password" id=""
+            / placeholder="Re-enter Password">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col signin-prompt">
+            <input type="checkbox" name="agreement" id="" / required>
+            <label for="agreement" id="">
+              Agree to <a href="/T&C/" id="tc"> Terms and Conditions </a>
+            </label>
+          </div>
+        </div>
+      </form>
+      <div class="row justify-content-center">
+        <button
+          type="submit"
+          form="signup-form"
+          class="btn btn-dark btn-signup"
+        >
+          Sign Up
+        </button>
+      </div>
+      <div class="row my-2">
+        <div class="col signin-prompt">
+          Already have an account? <a href="/signin/">Sign In!</a>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/d7dc8983c1.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="{% static 'js/signup.js' %}"></script>
+  </body>
+</html>

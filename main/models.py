@@ -31,11 +31,12 @@ class Album(models.Model):
 class Song(models.Model):
     name = models.CharField(max_length=50)
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
-    secondary_artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    secondary_artist = models.ForeignKey(
+        Artist, on_delete=models.CASCADE, null=True, blank=True)
     duration = models.TimeField()
-    path = models.CharField(max_length=100)
-    no_of_plays = models.IntegerField()
-    added_on = models.DateTimeField()
+    path = models.CharField(max_length=100, null=True, blank=True)
+    no_of_plays = models.IntegerField(null=True, blank=True)
+    added_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
@@ -46,7 +47,8 @@ class Song(models.Model):
 
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    song = models.ForeignKey(
+        Song, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f"{self.user.first_name}'s Favorites"
@@ -58,7 +60,8 @@ class Favorite(models.Model):
 class Playlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    song = models.ForeignKey(
+        Song, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name

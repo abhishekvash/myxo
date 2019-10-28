@@ -1,14 +1,11 @@
 body {
   background: linear-gradient(125.42deg, #000000 0%, #001427 100%);
   min-height: 100vh;
-  #logo {
-    margin: 4rem auto 0 auto;
-  }
   input {
     margin: 0.5rem 0;
     text-align: center;
   }
-  .btn-signin {
+  .btn-signup {
     background-color: white;
     color: black;
     font-weight: 500;
@@ -16,13 +13,32 @@ body {
   .form-control {
     border-radius: 5px;
   }
-  .signup-prompt {
+  .signin-prompt {
     text-align: center;
     color: white;
     font-weight: 500;
   }
   a:hover {
     text-decoration: none;
+  }
+  .signup {
+    padding: 7rem 0 0 0;
+  }
+  #tc {
+    color: rgb(3, 189, 3);
+    font-weight: 500;
+    text-align: center;
+  }
+  .google_auth {
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    padding: 0.4rem 2rem;
+    width: 100%;
+  }
+  h3 {
+      padding: 1rem;
+    font-weight: 600;
+    color: white;
   }
 }
 
