@@ -1,0 +1,23 @@
+body {
+  background: linear-gradient(125.42deg, #000000 0%, #171717 100%);
+  min-height: 100vh;
+  #logo {
+    margin: 5rem auto 0 auto;
+  }
+  input {
+      margin: 0.5rem 0;
+      text-align: center;
+  }
+  .btn-signin {
+      background-color: white;
+      color: black;
+      font-weight: 500;
+  }
+  .form-control {
+      border-radius: 5px;
+  }
+}
+
+.row {
+  margin: auto;
+}
