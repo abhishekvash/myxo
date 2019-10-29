@@ -14,6 +14,11 @@ body .btn-signup {
   font-weight: 500;
 }
 
+body .error-field {
+  -webkit-box-shadow: 0 0 8px #ff0000;
+          box-shadow: 0 0 8px #ff0000;
+}
+
 body .form-control {
   border-radius: 5px;
 }
@@ -53,5 +58,11 @@ body h3 {
 
 .row {
   margin: auto;
+}
+
+.m-headfoot {
+  background: -webkit-gradient(linear, right top, left top, from(#0f0f0f), to(#171717));
+  background: linear-gradient(270deg, #0f0f0f 0%, #171717 100%);
+  color: white;
 }
 /*# sourceMappingURL=signup.css.map */

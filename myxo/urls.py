@@ -28,5 +28,6 @@ urlpatterns = [
     path('signout/', signout),
     path('signup/', signup),
     path('api/user_auth/', user_auth),
+    path('api/user_reg/', user_reg),
     path('oauth/', include('social_django.urls', namespace="social"))
 ]

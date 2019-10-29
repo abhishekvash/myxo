@@ -10,6 +10,9 @@ body {
     color: black;
     font-weight: 500;
   }
+  .error-field {
+    box-shadow: 0 0 8px#ff0000;
+  }
   .form-control {
     border-radius: 5px;
   }
@@ -36,7 +39,7 @@ body {
     width: 100%;
   }
   h3 {
-      padding: 1rem;
+    padding: 1rem;
     font-weight: 600;
     color: white;
   }
@@ -44,4 +47,9 @@ body {
 
 .row {
   margin: auto;
+}
+
+.m-headfoot {
+  background: linear-gradient(270deg, #0f0f0f 0%, #171717 100%);
+  color: white;
 }

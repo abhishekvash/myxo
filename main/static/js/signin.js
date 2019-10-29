@@ -6,7 +6,6 @@ $("#signin-form").submit(function(e) {
     data: $(this).serialize(),
     success: function(res) {
       if (res.validated == true) {
-        console.log('Validated')
         document.location.replace('/')
       }
       if (res.user_present == false) {

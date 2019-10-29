@@ -19,11 +19,52 @@
     />
   </head>
   <body>
+    <div class="modal fade" id="reg-complete" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header m-headfoot">
+            <h5 class="modal-title" id="reg-complete-label">
+              Sign Up Complete!
+            </h5>
+          </div>
+          <div class="modal-body m-headfoot">
+            Head back to the Sign In page
+          </div>
+          <div class="modal-footer m-headfoot">
+            <button type="button" class="btn btn-dark btn-signup to-signin" >Sign In</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="reg-incomplete" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header m-headfoot">
+            <h5 class="modal-title" id="reg-complete-label">
+              Oops! Something went wrong
+            </h5>
+          </div>
+          <div class="modal-body m-headfoot">
+            Do you want to try again ?
+          </div>
+          <div class="modal-footer m-headfoot">
+            <button type="button" class="btn btn-dark btn-signup" id="retry">
+              Retry
+            </button>
+            <button type="button" class="btn btn-dark to-signin" >
+              Sign In
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container signup">
       <div class="row justify-content-center">
         <div class="col-sm-12 col-md-3">
-          <form action="" method="post">
-            <button type="button" class="btn google_auth">
+          <form action='{% url "social:begin" "google-oauth2" %}'>
+            <button type="submit" class="btn google_auth">
               Sign Up With <i class="fab fa-google"></i>
             </button>
           </form>
@@ -35,31 +76,31 @@
       <form action="" method="post" id="signup-form" class="form-group">
         <div class="row justify-content-center">
           <div class="col-sm-12 col-md-3">
-            <input class="form-control" type="text" name="username" id="" /
-            placeholder="Username">
+            {% csrf_token %} <input class="form-control" type="text"
+            name="username" id="username" / placeholder="Username" required>
           </div>
         </div>
         <div class="row justify-content-center">
           <div class="col-sm-12 col-md-3">
-            <input class="form-control" type="email" name="email" id="" /
-            placeholder="Email">
+            <input class="form-control" type="email" name="email" id="email" /
+            placeholder="Email" required>
           </div>
         </div>
         <div class="row justify-content-center">
           <div class="col-sm-12 col-md-3">
-            <input class="form-control" type="password" name="password" id="" /
-            placeholder="Password">
+            <input class="form-control" type="password" name="password"
+            id="password" / placeholder="Password" required>
           </div>
         </div>
         <div class="row justify-content-center">
           <div class="col-sm-12 col-md-3">
-            <input class="form-control" type="password" name="re_password" id=""
-            / placeholder="Re-enter Password">
+            <input class="form-control" type="password" name="re_password"
+            id="re_password" / placeholder="Re-enter Password" required>
           </div>
         </div>
         <div class="row">
           <div class="col signin-prompt">
-            <input type="checkbox" name="agreement" id="" / required>
+            <input type="checkbox" name="agreement" id="check" / required>
             <label for="agreement" id="">
               Agree to <a href="/T&C/" id="tc"> Terms and Conditions </a>
             </label>
@@ -71,6 +112,8 @@
           type="submit"
           form="signup-form"
           class="btn btn-dark btn-signup"
+          id="signup-btn"
+          disabled
         >
           Sign Up
         </button>
@@ -84,17 +127,14 @@
 
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
       crossorigin="anonymous"
     ></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
       crossorigin="anonymous"
     ></script>
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
     <script

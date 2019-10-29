@@ -49,3 +49,24 @@ def home(request):
 def signout(request):
     logout(request)
     return redirect('/signin/')
+
+
+def user_reg(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    email = request.POST['email']
+    registered = False
+    user_present = True
+    try:
+        user = User.objects.get(username=username)
+    except Exception:
+        user_present = False
+        if password:
+            user = User.objects.create_user(
+                username=username, email=email, password=password)
+            registered = True
+            print(registered)
+    print(registered)
+    response = {"registered": registered,
+                "user_present": user_present}
+    return JsonResponse(response)
