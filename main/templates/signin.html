@@ -68,7 +68,7 @@
         <div class="col-sm-12 col-md-3">
           <form action='{% url "social:begin" "google-oauth2" %}'>
             {% csrf_token %}
-            <button type="button" class="btn google_auth">
+            <button type="submit" class="btn google_auth">
               Sign In With <i class="fab fa-google"></i>
             </button>
           </form>
