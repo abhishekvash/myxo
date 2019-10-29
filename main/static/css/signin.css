@@ -12,6 +12,11 @@ body input {
   text-align: center;
 }
 
+body .error-field {
+  -webkit-box-shadow: 0 0 8px #ff0000;
+          box-shadow: 0 0 8px #ff0000;
+}
+
 body .btn-signin {
   background-color: white;
   color: black;
@@ -30,6 +35,14 @@ body .signup-prompt {
 
 body a:hover {
   text-decoration: none;
+}
+
+body .google_auth {
+  margin: 0.2rem 0 0 0;
+  background-color: white;
+  border-radius: 15px;
+  padding: 0.4rem 2rem;
+  width: 100%;
 }
 
 .row {

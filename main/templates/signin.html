@@ -24,43 +24,74 @@
         <img src="{% static 'assets/login_logo.svg' %}" alt="" / id="logo">
       </div>
       <form action="" method="post" id="signin-form" class="form-group">
+        {% csrf_token %}
         <div class="row justify-content-center">
           <div class="col-sm-12 col-md-3">
-            <input class="form-control" type="text" name="username" id="" / placeholder="Username">
+            <input
+              class="form-control"
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Username"
+            />
           </div>
         </div>
         <div class="row justify-content-center">
           <div class="col-sm-12 col-md-3">
-            <input class="form-control" type="password" name="password" id="" / placeholder="Password">
+            <input
+              class="form-control"
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+            />
           </div>
         </div>
       </form>
       <div class="row justify-content-center">
-        <button type="submit" form="signin-form" class="btn btn-dark btn-signin">Sign In</button>
+        <button
+          type="submit"
+          form="signin-form"
+          class="btn btn-dark btn-signin"
+          id="signin"
+        >
+          Sign In
+        </button>
       </div>
       <div class="row my-2">
         <div class="col signup-prompt">
-          Not a part of yet? <span class="signup"> <a href="/signup/">Sign Up!</a></span>
+          Not a part of yet?
+          <span class="signup"> <a href="/signup/">Sign Up!</a></span>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-3">
+          <form action='{% url "social:begin" "google-oauth2" %}'>
+            {% csrf_token %}
+            <button type="button" class="btn google_auth">
+              Sign In With <i class="fab fa-google"></i>
+            </button>
+          </form>
         </div>
       </div>
     </div>
 
-
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
       crossorigin="anonymous"
     ></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
       crossorigin="anonymous"
     ></script>
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
     <script src="{% static 'js/signin.js' %}"></script>
+    <script
+      src="https://kit.fontawesome.com/d7dc8983c1.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

@@ -8,6 +8,9 @@ body {
     margin: 0.5rem 0;
     text-align: center;
   }
+  .error-field {
+    box-shadow: 0 0 8px#ff0000;
+  }
   .btn-signin {
     background-color: white;
     color: black;
@@ -24,6 +27,15 @@ body {
   a:hover {
     text-decoration: none;
   }
+
+.google_auth {
+  margin: 0.2rem 0 0 0 ;
+  background-color: white;
+  border-radius: 15px;
+  padding: 0.4rem 2rem;
+  width: 100%;
+}
+
 }
 
 .row {
