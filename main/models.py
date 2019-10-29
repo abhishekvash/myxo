@@ -20,6 +20,7 @@ class Album(models.Model):
     genre = models.CharField(max_length=20)
     duration = models.TimeField()
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    added = models.DateField(auto_now_add=True, blank=True, null= True)
 
     def __str__(self):
         return self.name
@@ -36,7 +37,6 @@ class Song(models.Model):
     duration = models.TimeField()
     path = models.CharField(max_length=100, null=True, blank=True)
     no_of_plays = models.IntegerField(null=True, blank=True)
-    added_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
