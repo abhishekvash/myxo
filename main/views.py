@@ -65,8 +65,6 @@ def user_reg(request):
             user = User.objects.create_user(
                 username=username, email=email, password=password)
             registered = True
-            print(registered)
-    print(registered)
     response = {"registered": registered,
                 "user_present": user_present}
     return JsonResponse(response)

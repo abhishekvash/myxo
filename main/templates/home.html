@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Myxo</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <div class="row h-100">
+      <div class="col-3 sidenav">
+        <h1>Sidebar</h1>
+      </div>
+      <div class="col-9 offset-3 px-0">
+        <div class="row">
+          <div class="col-12 search-bar">
+            <h1>Search</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 content-container">
+            <div id="content">
+              <p id="heading">Content</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fixed-bottom player">
+      <div class="row h-100">
+        <div class="col-3 my-auto">
+          Meta data
+        </div>
+        <div class="col-9 my-auto">
+          <div class="row my-2 justify-content-center h-100">
+            <div class="col-1 my-auto">
+              <div id="current-time" class="time">
+                0:00
+              </div>
+            </div>
+            <div class="col-10 my-auto">
+              <input type="range" min='0' name="seekbar" id="seekbar" step="1"/
+              onchange="seekSong()" class="slider" value="0">
+            </div>
+            <div class="col-1 my-auto">
+              <div id="total-time" class="time">
+                3:50
+              </div>
+            </div>
+          </div>
+          <div class="row my-2 justify-content-center">
+            <div class="col-10 p-0 ">
+              <div class="row justify-content-center">
+                <div class="col ">
+                  <div class="row h-100">
+                    <div class="col my-auto px-0">
+                      <input
+                        autocomplete="off"
+                        type="range"
+                        name="volume"
+                        id="volume"
+                        class="slider"
+                        step="0.1"
+                        min="0"
+                        max="1"
+                        value="0.8"
+                        onmousemove="updateVolume()"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div class="col ">
+                  <div class="row h-100">
+                    <div class="col my-auto">
+                      <img src="{% static 'assets/player-icons/prev.png' %}" alt="" srcset="" /
+                      onclick="previous_song()" id="prev">
+                    </div>
+                    <div class="col my-auto">
+                      <img src="{% static 'assets/player-icons/play.png' %}" alt="" srcset="" /
+                      id='play-pause' onclick="playPause()">
+                    </div>
+                    <div class="col my-auto">
+                      <img src="{% static 'assets/player-icons/next.png' %}" alt="" srcset="" /
+                      onclick="next_song()" id='next'>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="row h-100 justify-content-center">
+                    <div class="col-4 my-auto">
+                      <img src="{% static 'assets/player-icons/loop.png' %}" alt="" /
+                      onclick="loop()" id='loop'>
+                    </div>
+                    <div class="col-4 my-auto">
+                      <img src="{% static 'assets/player-icons/shuffle.png' %}" alt="" /
+                      onclick="shuffle()" id='shuffle'>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="{% static 'js/player.js' %}"></script>
+  </body>
+</html>
