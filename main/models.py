@@ -9,6 +9,9 @@ class Artist(models.Model):
     def __str__(self):
         return self.name
 
+    def natural_key(self):
+        return (self.pk, self.name)
+
     class Meta:
         db_table = "Artist"
 
@@ -20,10 +23,13 @@ class Album(models.Model):
     genre = models.CharField(max_length=20)
     duration = models.TimeField()
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
-    added = models.DateField(auto_now_add=True, blank=True, null= True)
+    added = models.DateField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):
         return self.name
+
+    def natural_key(self):
+        return (self.pk, self.name, self.art, self.artist)
 
     class Meta:
         db_table = "Album"
@@ -40,6 +46,9 @@ class Song(models.Model):
 
     def __str__(self):
         return self.name
+
+    def natural_key(self):
+        return (self.name, self.album, self.path)
 
     class Meta:
         db_table = "Song"
@@ -60,11 +69,23 @@ class Favorite(models.Model):
 class Playlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-    song = models.ForeignKey(
-        Song, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    def natural_key(self):
+        return (self.pk, self.name)
+
+    class Meta:
+        db_table = "Playlist"
+
+
+class PlaylistSong(models.Model):
+    playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        db_table = "Playlist"
+        db_table = "PlaylistSong"

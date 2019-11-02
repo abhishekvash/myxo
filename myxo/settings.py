@@ -91,7 +91,7 @@ DATABASES = {
         'USER': os.getenv('MYXO_USER', ''),
         'PASSWORD': os.getenv('MYXO_PASS', ''),
         'HOST': 'localhost',
-        'PORT': '5432',
+        'PORT': '5433',
     }
 }
 
