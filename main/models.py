@@ -10,7 +10,7 @@ class Artist(models.Model):
         return self.name
 
     def natural_key(self):
-        return (self.pk, self.name)
+        return (self.name,)
 
     class Meta:
         db_table = "Artist"
@@ -19,9 +19,9 @@ class Artist(models.Model):
 class Album(models.Model):
     name = models.CharField(max_length=50)
     year = models.IntegerField()
+    duration = models.TimeField()
     art = models.CharField(max_length=100)
     genre = models.CharField(max_length=20)
-    duration = models.TimeField()
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     added = models.DateField(auto_now_add=True, blank=True, null=True)
 
@@ -29,7 +29,7 @@ class Album(models.Model):
         return self.name
 
     def natural_key(self):
-        return (self.pk, self.name, self.art, self.artist)
+        return (self.name, self.art, self.artist.name)
 
     class Meta:
         db_table = "Album"
