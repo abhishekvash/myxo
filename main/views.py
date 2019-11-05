@@ -107,7 +107,6 @@ def upload_artists(request):
         print(name)
         print(photo)
         artist = Artist.objects.create(name=name, photo=photo)
-
         return HttpResponse("DONE")
 
 
@@ -119,9 +118,7 @@ def upload_album(request):
         art = request.GET.get("art")
         genre = request.GET.get("genre")
         artist = request.GET.get("artist")
-
         artist = Artist.objects.get(pk=int(artist))
-
         album = Album.objects.create(name=name,
                                      year=year,
                                      duration=duration,
@@ -135,22 +132,17 @@ def upload_songs(request):
     if request.method == "GET":
         name = request.GET.get("name")
         album = int(request.GET.get("album"))
-        # secondary_artist = (request.GET.get("secondary_artist"))
         duration = request.GET.get("duration")
         path = request.GET.get("path")
         no_of_plays = request.GET.get("no_of_plays")
-
         album = Album.objects.get(pk=album)
-
-        # if secondary_artist != None:
-        #     secondary_artist = Artist.objects.get(pk=int(secondary_artist))
-
         song = Song.objects.create(name=name,
                                    album=album,
                                    duration=duration,
                                    path=path,
                                    no_of_plays=no_of_plays)
         return HttpResponse("done")
+
 
 def upload_artists_from_local(request):
     artists = Artist.objects.all()
@@ -160,15 +152,11 @@ def upload_artists_from_local(request):
         json_data["photo"] = artist.photo
         response = requests.get(
             "https://myxo.herokuapp.com/upload_artist/", json_data)
-
-    print(json_data)
-    print(response)
     return HttpResponse("done")
 
 
 def upload_album_from_local(request):
     albums = Album.objects.all()
-
     json_data = {}
     for album in albums:
         json_data["name"] = album.name
@@ -177,17 +165,14 @@ def upload_album_from_local(request):
         json_data["art"] = album.art
         json_data["genre"] = album.genre
         json_data["artist"] = album.artist.pk
-
         response = requests.get(
             "https://myxo.herokuapp.com/upload_album/", json_data)
-
     return HttpResponse("done")
+
 
 def upload_song_from_local(request):
     songs = Song.objects.all()
-
     json_data = {}
-
     for song in songs:
         json_data["name"] = song.name
         json_data["album"] = song.album.pk
@@ -198,5 +183,5 @@ def upload_song_from_local(request):
 
         response = requests.get(
             "https://myxo.herokuapp.com/upload_songs/", json_data)
-
-        return HttpResponse("done")
+        print(response)
+    return HttpResponse("done")
