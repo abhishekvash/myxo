@@ -190,7 +190,7 @@ def upload_song_from_local(request):
 
     for song in songs:
         json_data["name"] = song.name
-        json_data["album"] = song.album
+        json_data["album"] = song.album.pk
         json_data["secondary_artist"] = song.secondary_artist
         json_data["duration"] = song.duration
         json_data["path"] = song.path
