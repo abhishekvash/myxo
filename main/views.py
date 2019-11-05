@@ -5,6 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.core import serializers as serial
 import json
+import requests
 
 from main.models import *
 
@@ -97,3 +98,12 @@ def search(request):
     response = {"albums": response1, "songs": response2, "artists": response3}
     response = json.dumps(response)
     return HttpResponse(response, content_type='application/json')
+
+def upload_artists(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        photo = request.POST.get("photo")
+
+        artist = Artist.objects.create(name=name, photo=photo)
+
+        return HttpResponse("DONE")
