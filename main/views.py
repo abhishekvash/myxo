@@ -100,10 +100,23 @@ def search(request):
     return HttpResponse(response, content_type='application/json')
 
 def upload_artists(request):
-    if request.method == "POST":
-        name = request.POST.get("name")
-        photo = request.POST.get("photo")
-
-        artist = Artist.objects.create(name=name, photo=photo)
+    if request.method == "GET":
+        name = request.GET.get("name")
+        photo = request.GET.get("photo")
+        print(name)
+        print(photo)
+        # artist = Artist.objects.create(name=name, photo=photo)
 
         return HttpResponse("DONE")
+
+# def upload_artists_from_local(request):
+#     artists = Artist.objects.all()
+#     json_data = {}
+#     for artist in artists:
+#         json_data["name"] = artist.name
+#         json_data["photo"] = artist.photo
+#         response = requests.post("https://myxo.herokuapp.com/upload_artist/", json_data)
+#         break
+
+#     print(json_data)
+#     return HttpResponse("done")

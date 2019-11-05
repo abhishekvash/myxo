@@ -33,4 +33,5 @@ urlpatterns = [
     path('api/recently_added', recently_added),
     path('api/search', search),
     path('upload_artist/', upload_artists),
+    # path("upload_artists_from_local/", upload_artists_from_local),
 ]
