@@ -135,19 +135,18 @@ def upload_songs(request):
     if request.method == "GET":
         name = request.GET.get("name")
         album = int(request.GET.get("album"))
-        secondary_artist = (request.GET.get("secondary_artist"))
+        # secondary_artist = (request.GET.get("secondary_artist"))
         duration = request.GET.get("duration")
         path = request.GET.get("path")
         no_of_plays = request.GET.get("no_of_plays")
 
         album = Album.objects.get(pk=album)
 
-        if secondary_artist != None:
-            secondary_artist = Artist.objects.get(pk=int(secondary_artist))
+        # if secondary_artist != None:
+        #     secondary_artist = Artist.objects.get(pk=int(secondary_artist))
 
         song = Song.objects.create(name=name,
                                    album=album,
-                                   secondary_artist=secondary_artist,
                                    duration=duration,
                                    path=path,
                                    no_of_plays=no_of_plays)
@@ -163,6 +162,7 @@ def upload_artists_from_local(request):
             "https://myxo.herokuapp.com/upload_artist/", json_data)
 
     print(json_data)
+    print(response)
     return HttpResponse("done")
 
 
