@@ -38,10 +38,10 @@ function previous_song() {
 function playPause() {
   if (song.paused) {
     song.play();
-    play_pause.setAttribute("src", "/player-icons/pause.png");
+    play_pause.setAttribute("src", "/static/assets/player-icons/pause.png");
   } else {
     song.pause();
-    play_pause.setAttribute("src", "/player-icons/play.png");
+    play_pause.setAttribute("src", "/static/assets/player-icons/play.png");
   }
   updateSeekBar();
 }
@@ -57,13 +57,15 @@ function next_song() {
       currentSong += 1;
     }
   }
-  loadSong();
-  song.play();
+  if (songs.length > 1) {
+    loadSong();
+    song.play();
+  }
 }
 
 function loadSong() {
-  if (songs.length > 1) {
-    song.src = `songs\\${songs[currentSong]}`;
+  if (songs.length >= 1) {
+    song.src = `${songs[currentSong]}`;
     setTimeout(showDuration, 100);
     setInterval(updateSeekBar, 1000);
   }
@@ -71,8 +73,8 @@ function loadSong() {
 
 function updateSeekBar() {
   let c = Math.round(song.currentTime);
-  seekbar.value = c;
   current_time.textContent = convertTime(c);
+  seekbar.value = c;
   if (song.ended) {
     next_song();
   }
@@ -127,19 +129,28 @@ document.addEventListener("keydown", function(e) {
 function loop() {
   if (song.loop == false) {
     song.loop = true;
-    loop_button.setAttribute("src", "/player-icons/loop_active.png");
+    loop_button.setAttribute(
+      "src",
+      "/static/assets/player-icons/loop_active.png"
+    );
   } else {
     song.loop = false;
-    loop_button.setAttribute("src", "/player-icons/loop.png");
+    loop_button.setAttribute("src", "/static/assets/player-icons/loop.png");
   }
 }
 
 function shuffle() {
   if (songShuffle == false) {
     songShuffle = true;
-    shuffle_button.setAttribute("src", "/player-icons/shuffle_active.png");
+    shuffle_button.setAttribute(
+      "src",
+      "/static/assets/player-icons/shuffle_active.png"
+    );
   } else {
     songShuffle = false;
-    shuffle_button.setAttribute("src", "/player-icons/shuffle.png");
+    shuffle_button.setAttribute(
+      "src",
+      "/static/assets/player-icons/shuffle.png"
+    );
   }
 }

@@ -1,0 +1,203 @@
+.body {
+  font-family: "Sarala", sans-serif;
+}
+
+.player {
+  background-color: #171717;
+  color: white;
+}
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+#seekbar {
+  width: 100%;
+  vertical-align: middle;
+}
+
+#volume {
+  vertical-align: middle;
+  width: 35%;
+}
+
+.row {
+  margin: auto;
+}
+
+.time {
+  text-align: center;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 1.3px;
+  border-radius: 5px;
+  background: #ffffff;
+  outline: none;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+#loop {
+  max-width: 60%;
+}
+
+#shuffle {
+  max-width: 60%;
+}
+
+.sidenav {
+  position: fixed;
+  background-color: #171717;
+  color: white;
+  color: white;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background: linear-gradient(180deg, #404040 -13.1%, #171717 62.64%);
+  overflow-y: auto;
+  height: 100%;
+  padding: 0 1.3rem;
+}
+
+.search-bar {
+  padding-top: 1.4rem;
+  position: fixed;
+  color: rgb(0, 41, 80);
+  top: 0;
+  background-color: white;
+  z-index: 10;
+  height: 5rem;
+}
+
+.content-container {
+  padding-top: 7rem;
+  overflow-y: auto;
+  padding-bottom: 7rem;
+}
+
+.search_input {
+  width: 30rem;
+  border: none;
+  border-bottom: 2px solid rgb(0, 41, 80);
+  box-shadow: 1px 5px 2px -3px rgba(95, 95, 95, 0.534);
+  font-size: 1.2rem;
+}
+
+*:focus {
+  outline: none;
+}
+
+#logo {
+  width: 155px;
+  margin: 0 auto 1rem auto;
+}
+
+.logo-container {
+  display: block;
+}
+
+h3 {
+  margin: 0.5rem 0;
+}
+
+h2 {
+  color: #353535;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+#home {
+  margin: 0 0 0.5rem 0;
+}
+
+#home-row:hover {
+  #home {
+    font-size: 1.77rem;
+  }
+  background: linear-gradient(
+    279.45deg,
+    #003261 0%,
+    rgba(0, 41, 80, 0) 103.07%
+  );
+  cursor: pointer;
+}
+
+.art {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 125px;
+    height: 125px;
+    object-fit: cover;
+    box-shadow: 4px 4px 10px rgba(95, 95, 95, 0.651);
+  }
+}
+
+.myxo_card {
+  width: 125px;
+  p {
+    text-transform: capitalize;
+    text-align: center;
+  }
+}
+
+.album_name {
+  font-weight: 500;
+  color: #2b2b2b;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.subtext_name {
+  font-weight: 500;
+  color: #2b2b2b;
+  font-size: 0.8rem;
+}
+
+.link-hover:hover {
+  font-size: 1.06rem;
+  font-weight: 500;
+  background: linear-gradient(
+    279.45deg,
+    #003261 0%,
+    rgba(0, 41, 80, 0) 103.07%
+  );
+  cursor: pointer;
+}
+
+.link-hover {
+  font-size: 1.05rem;
+  padding: 0.1rem 0;
+  transition: all 0.01s ease-in-out;
+}
+
+.player-div {
+  min-width: 800px !important;
+}

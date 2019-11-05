@@ -1,0 +1,91 @@
+#album_art {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 175px;
+  height: 175px;
+}
+
+#album_title {
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  text-transform: capitalize;
+}
+
+#artist_name {
+  color: #616161;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.7rem;
+  text-transform: capitalize;
+}
+
+#misc_data {
+  color: dimgray;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+  text-transform: capitalize;
+}
+
+#genre {
+  color: dimgray;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+  text-transform: capitalize;
+}
+
+#year {
+  color: #525151;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+#album_meta {
+  background-color: #fcfcfc;
+  padding: 1rem 1rem;
+  -webkit-box-shadow: 6px 5px 15px rgba(105, 105, 105, 0.315);
+          box-shadow: 6px 5px 15px rgba(105, 105, 105, 0.315);
+  margin-bottom: 3rem;
+}
+
+.song {
+  background: #fdfdfd;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid #f1f1f1;
+  -webkit-box-shadow: 1px 1px 5px rgba(97, 97, 97, 0.151);
+          box-shadow: 1px 1px 5px rgba(97, 97, 97, 0.151);
+}
+
+.song .play_button {
+  width: 23px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.song .song_name {
+  margin: 0.2rem 0;
+  text-transform: capitalize;
+}
+
+.song .song_duration {
+  color: #171717;
+  font-weight: 500;
+  margin: 0.2rem 0;
+}
+
+.song .song_name {
+  color: #171717;
+  font-weight: 500;
+  margin: 0.2rem 0;
+  text-transform: capitalize;
+}
+
+.song .song_menu {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 1rem;
+}
+/*# sourceMappingURL=album.css.map */

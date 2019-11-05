@@ -41,7 +41,7 @@ class Song(models.Model):
     secondary_artist = models.ForeignKey(
         Artist, on_delete=models.CASCADE, null=True, blank=True)
     duration = models.TimeField()
-    path = models.CharField(max_length=100, null=True, blank=True)
+    path = models.CharField(max_length=300, null=True, blank=True)
     no_of_plays = models.IntegerField(null=True, blank=True)
 
     def __str__(self):

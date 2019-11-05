@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.core import serializers as serial
+import json
 
 from main.models import *
 
@@ -68,3 +70,30 @@ def user_reg(request):
     response = {"registered": registered,
                 "user_present": user_present}
     return JsonResponse(response)
+
+
+def recently_added(request):
+    albums = Album.objects.raw(
+        ''' SELECT * FROM "Album" ORDER BY added DESC LIMIT 10; ''')
+    response = serial.serialize('json', albums, use_natural_foreign_keys=True)
+    return HttpResponse(response, content_type='application/json')
+
+
+def search(request):
+    phrase = request.POST['phrase']
+    albums = Album.objects.raw('''
+        SELECT * FROM "Album" WHERE name ~* %s;
+    ''', [phrase])
+    songs = Song.objects.raw('''
+        SELECT * FROM "Song" WHERE name ~* %s;
+    ''', [phrase])
+    artists = Artist.objects.raw('''
+        SELECT * FROM "Artist" WHERE name ~* %s;
+    ''', [phrase])
+    response1 = serial.serialize('json', albums, use_natural_foreign_keys=True)
+    response2 = serial.serialize('json', songs, use_natural_foreign_keys=True)
+    response3 = serial.serialize(
+        'json', artists, use_natural_foreign_keys=True)
+    response = {"albums": response1, "songs": response2, "artists": response3}
+    response = json.dumps(response)
+    return HttpResponse(response, content_type='application/json')
