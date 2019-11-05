@@ -11,15 +11,6 @@ let loop_button = document.querySelector("#loop");
 let currentSong = 0;
 let song = new Audio();
 let songShuffle = false;
-window.onload = initialise();
-let heading = document.querySelector("#heading");
-let content = document.querySelector("#content");
-
-function initialise() {
-  current_time.textContent = " ";
-  total_time.textContent = " ";
-  loadSong();
-}
 
 function previous_song() {
   if (songShuffle) {
@@ -64,10 +55,14 @@ function next_song() {
 }
 
 function loadSong() {
+  total_time.textContent = '--:--'
+  current_time.textContent = '--:--'
   if (songs.length >= 1) {
     song.src = `${songs[currentSong]}`;
-    setTimeout(showDuration, 100);
-    setInterval(updateSeekBar, 1000);
+    song.addEventListener("loadedmetadata", function() {
+      setTimeout(showDuration, 100);
+      setInterval(updateSeekBar, 1000);
+    });
   }
 }
 
