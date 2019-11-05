@@ -32,4 +32,5 @@ urlpatterns = [
     path('oauth/', include('social_django.urls', namespace="social")),
     path('api/recently_added', recently_added),
     path('api/search', search),
+    path('upload_artist/', upload_artists),
 ]
