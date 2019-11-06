@@ -55,8 +55,8 @@ function next_song() {
 }
 
 function loadSong() {
-  total_time.textContent = '--:--'
-  current_time.textContent = '--:--'
+  total_time.textContent = "--:--";
+  current_time.textContent = "--:--";
   if (songs.length >= 1) {
     song.src = `${songs[currentSong]}`;
     song.addEventListener("loadedmetadata", function() {
@@ -99,26 +99,28 @@ function seekSong() {
 }
 
 document.addEventListener("keydown", function(e) {
-  let key = e.key;
-  if (key == "ArrowRight") {
-    song.currentTime += 10;
+  if (typing == false) {
+    let key = e.key;
+    if (key == "ArrowRight") {
+      song.currentTime += 10;
+    }
+    if (key == "ArrowLeft") {
+      song.currentTime -= 10;
+    }
+    if (key == "ArrowUp" && volume.value <= 0.9) {
+      song.volume += 0.1;
+      volume.value = song.volume;
+    }
+    if (key == "ArrowDown" && volume.value >= 0) {
+      volume.value -= 0.1;
+    }
+    if (key == " ") {
+      e.preventDefault();
+      playPause();
+    }
+    updateSeekBar();
+    updateVolume();
   }
-  if (key == "ArrowLeft") {
-    song.currentTime -= 10;
-  }
-  if (key == "ArrowUp" && volume.value <= 0.9) {
-    song.volume += 0.1;
-    volume.value = song.volume;
-  }
-  if (key == "ArrowDown" && volume.value >= 0) {
-    volume.value -= 0.1;
-  }
-  if (key == " ") {
-    e.preventDefault();
-    playPause();
-  }
-  updateSeekBar();
-  updateVolume();
 });
 
 function loop() {

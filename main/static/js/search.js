@@ -1,3 +1,14 @@
+let typing = false;
+$("#search_input").on("focus", function() {
+  typing = true;
+  if (phrase.length == 0) {
+    typing = false;
+  }
+});
+$("#search_input").on("blur", function() {
+  typing = false;
+});
+
 $("#search_input").on("keyup", function() {
   let phrase = $(this).val();
   if (phrase.length > 0) {

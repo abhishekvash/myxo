@@ -3,6 +3,12 @@ $(document).ready(function() {
   load_home();
 });
 
+$("#home").on("click", function() {
+  $("#content").empty();
+  $("#content").append(home_data);
+  load_home();
+});
+
 function load_home() {
   $.ajax({
     method: "GET",
@@ -75,3 +81,7 @@ function load_home() {
     }
   });
 }
+
+$('#signout').on('click', function() {
+  window.location = '/signout'
+})
