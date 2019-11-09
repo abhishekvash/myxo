@@ -60,14 +60,10 @@
 }
 
 .song .play_button {
+  margin: 0.2rem 0;
   width: 23px;
   -o-object-fit: cover;
      object-fit: cover;
-}
-
-.song .song_name {
-  margin: 0.2rem 0;
-  text-transform: capitalize;
 }
 
 .song .song_duration {
@@ -84,8 +80,19 @@
 }
 
 .song .song_menu {
+  margin: 0.3rem 0 0 0;
   -o-object-fit: cover;
      object-fit: cover;
   height: 1rem;
+  padding: 0 0.5rem;
+}
+
+.m-headfoot {
+  background: -webkit-gradient(linear, right top, left top, from(#0f0f0f), to(#171717));
+  background: linear-gradient(270deg, #0f0f0f 0%, #171717 100%);
+  color: white;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 /*# sourceMappingURL=album.css.map */

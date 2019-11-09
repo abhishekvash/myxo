@@ -4,10 +4,11 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.core import serializers as serial
+from django.db import connection
 import json
 import requests
-
 from main.models import *
+cursor = connection.cursor()
 
 
 def signin(request):
@@ -113,6 +114,39 @@ def get_album(request):
     return HttpResponse(response, content_type='application/json')
 
 
+def update_favorites(request):
+    no_fav = False
+    try:
+        add_to_favorites = request.POST['add_to_fav']
+    except Exception:
+        no_fav = True
+    user_id = int(request.user.pk)
+    song_pk = int(request.POST['song_pk'])
+    favorite = Favorite.objects.raw(
+        ''' SELECT * FROM "Favorites" WHERE song_id = %s AND user_id = %s ; ''', [song_pk, user_id])
+    if len(favorite) == 0 and add_to_favorites == 'on':
+        cursor.execute(''' INSERT INTO "Favorites"(user_id, song_id) VALUES(%s, %s); ''', [
+            user_id, song_pk])
+    if len(favorite) > 0 and no_fav is True:
+        cursor.execute(''' DELETE FROM "Favorites" WHERE user_id = %s AND song_id = %s ; ''', [
+            user_id, song_pk])
+    return HttpResponse('ok')
+
+
+def confirm_favorite(request):
+    is_favorite = False
+    user_id = int(request.user.pk)
+    song_pk = int(request.GET['song_pk'])
+    favorite = Favorite.objects.raw(
+        ''' SELECT * FROM "Favorites" WHERE song_id = %s AND user_id = %s ; ''', [song_pk, user_id])
+    if len(favorite) == 0:
+        is_favorite = False
+    else:
+        is_favorite = True
+    response = {"is_favorite": is_favorite}
+    return JsonResponse(response)
+
+
 # For uploading from local db to remote db
 def upload_artists(request):
     if request.method == "GET":
@@ -194,7 +228,6 @@ def upload_song_from_local(request):
         json_data["duration"] = song.duration
         json_data["path"] = song.path
         json_data["no_of_play"] = song.no_of_plays
-
         response = requests.get(
             "https://myxo.herokuapp.com/upload_songs/", json_data)
         print(response)

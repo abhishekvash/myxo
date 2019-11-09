@@ -55,12 +55,9 @@
   border: 1px solid rgb(241, 241, 241);
   box-shadow: 1px 1px 5px rgba(97, 97, 97, 0.151);
   .play_button {
+    margin: 0.2rem 0;
     width: 23px;
     object-fit: cover;
-  }
-  .song_name {
-    margin: 0.2rem 0;
-    text-transform: capitalize;
   }
   .song_duration {
     color: #171717;
@@ -74,7 +71,15 @@
     text-transform: capitalize;
   }
   .song_menu {
+    margin: 0.3rem 0 0 0;
     object-fit: cover;
     height: 1rem;
+    padding:0 0.5rem;
   }
+}
+
+.m-headfoot {
+  background: linear-gradient(270deg, #0f0f0f 0%, #171717 100%);
+  color: white;
+  justify-content: center;
 }

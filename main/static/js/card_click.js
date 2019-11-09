@@ -3,6 +3,7 @@ let artist_id = 0;
 let paths_array = [];
 let album_added_to_queue = false;
 let menu_clicked = false;
+let song_pk = 0;
 
 $(document).on("click", ".song_card ", function() {
   $("#search_input").val("");
@@ -21,6 +22,7 @@ $(document).on("click", ".album_card ", function() {
 });
 
 $(document).on("click", ".song ", function() {
+  song_pk = $(this).children("p3")[0].innerHTML;
   if (menu_clicked == false) {
     $("#search_input").val("");
     if (album_added_to_queue == true) {
@@ -41,7 +43,20 @@ $(document).on("click", ".song ", function() {
 });
 
 $(document).on("click", ".song_menu ", function() {
-  menu_clicked = true
+  menu_clicked = true;
+  $.ajax({
+    method: "GET",
+    url: "/api/confirm_favorite/",
+    data: { song_pk: song_pk },
+    success: function(res) {
+      if (res.is_favorite == true) {
+        $("#to_fav").prop("checked", true);
+      } else {
+        $("#to_fav").prop("checked", false);
+      }
+    }
+  });
+  $("#song_menu").modal("show");
 });
 
 $(document).on("click", ".artist_card ", function() {
@@ -91,6 +106,8 @@ function album_clicked() {
         $("#songs_container").append(`
                 <div class="song">
                 <p hidden>${index}</p>
+                <p2 hidden>${element.fields.path}</p2>
+                <p3 hidden>${element.pk}</p3>
                   <div class="row">
                     <div class="col-1">
                       <img src="/static/assets/player-icons/play_playlist.png" alt="" srcset="" class="play_button">
@@ -111,3 +128,19 @@ function album_clicked() {
     }
   });
 }
+
+$("#song_menu_done").on("click", function() {
+  if ($("#to_queue").prop("checked") == true) {
+    songs.push($(".song").children("p2")[0].innerHTML);
+  }
+  data = $("#song_menu_form").serialize();
+  data = `${data}&song_pk=${song_pk}`;
+  $.ajax({
+    method: "POST",
+    url: "/api/update_favorites/",
+    data: data
+  });
+  $("#to_queue").prop("checked", false);
+  $("#to_fav").prop("checked", false);
+  $("#song_menu").modal("hide");
+});
