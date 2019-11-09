@@ -1,4 +1,5 @@
 let typing = false;
+let phrase = "";
 $("#search_input").on("focus", function() {
   typing = true;
   if (phrase.length == 0) {
@@ -10,7 +11,7 @@ $("#search_input").on("blur", function() {
 });
 
 $("#search_input").on("keyup", function() {
-  let phrase = $(this).val();
+  phrase = $(this).val();
   if (phrase.length > 0) {
     if (phrase.length > 2) {
       $.ajax({
@@ -48,6 +49,7 @@ $("#search_input").on("keyup", function() {
             result_albums.forEach(element => {
               $("#results_container").append(`
                 <div class="myxo_card mr-5 album_card">
+                    <p class="path" hidden>${element.pk}</p>
                     <div class="art">
                         <img src="/static/${element.fields.art}">
                     </div>
@@ -63,11 +65,11 @@ $("#search_input").on("keyup", function() {
                 <div class="myxo_card mr-5 song_card">
                     <p class="path" hidden>${element.fields.path}</p>
                     <div class="art">
-                        <img src="/static/${element.fields.album[1]}">
+                        <img src="/static/${element.fields.album[2]}">
                     </div>
                     <p class="album_name">${element.fields.name}</p>
                     <p class="subtext_name">Song by ${
-                      element.fields.album[2]
+                      element.fields.album[3]
                     }</p>
                 </div>
                 `);

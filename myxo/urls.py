@@ -32,10 +32,12 @@ urlpatterns = [
     path('oauth/', include('social_django.urls', namespace="social")),
     path('api/recently_added', recently_added),
     path('api/search', search),
-    path('upload_artist/', upload_artists),
-    path("upload_album/",upload_album),
-    path("upload_songs/",upload_songs),
+    path('api/get_album/', get_album),
 
+    # For uploading from local db to remote db
+    path('upload_artist/', upload_artists),
+    path("upload_album/", upload_album),
+    path("upload_songs/", upload_songs),
     path("upload_artists_from_local/", upload_artists_from_local),
     path("upload_album_from_local/", upload_album_from_local),
     path("upload_song_from_local/", upload_song_from_local),

@@ -100,6 +100,20 @@ def search(request):
     return HttpResponse(response, content_type='application/json')
 
 
+def get_album(request):
+    album_id = request.GET['album_id']
+    album = Album.objects.raw('''
+    SELECT * FROM "Album" WHERE id = %s ''', [album_id])
+    songs = Song.objects.raw('''
+    SELECT * FROM "Song" WHERE album_id = %s''', [album_id])
+    response1 = serial.serialize('json', album, use_natural_foreign_keys=True)
+    response2 = serial.serialize('json', songs, use_natural_foreign_keys=True)
+    response = {"album": response1, "songs": response2, }
+    response = json.dumps(response)
+    return HttpResponse(response, content_type='application/json')
+
+
+# For uploading from local db to remote db
 def upload_artists(request):
     if request.method == "GET":
         name = request.GET.get("name")

@@ -40,7 +40,6 @@ function playPause() {
 function next_song() {
   if (songShuffle) {
     currentSong = Math.floor(Math.random() * (+songs.length - +0)) + +0;
-    console.log(currentSong);
   } else {
     if (currentSong == songs.length - 1) {
       currentSong = 0;
@@ -93,14 +92,13 @@ function updateVolume() {
 }
 
 function seekSong() {
-  console.log("lol");
   song.currentTime = seekbar.value;
   updateSeekBar();
 }
 
 document.addEventListener("keydown", function(e) {
-  if (typing == false) {
-    let key = e.key;
+  let key = e.key;
+  if (typing == false && isPlaying == true) {
     if (key == "ArrowRight") {
       song.currentTime += 10;
     }
@@ -120,6 +118,9 @@ document.addEventListener("keydown", function(e) {
     }
     updateSeekBar();
     updateVolume();
+  }
+  if (key == "Enter") {
+    e.preventDefault();
   }
 });
 
@@ -151,3 +152,13 @@ function shuffle() {
     );
   }
 }
+
+let isPlaying = function() {
+  return (
+    song &&
+    song.currentTime > 0 &&
+    !song.paused &&
+    !song.ended &&
+    song.readyState > 2
+  );
+};

@@ -29,7 +29,7 @@ class Album(models.Model):
         return self.name
 
     def natural_key(self):
-        return (self.name, self.art, self.artist.name)
+        return (self.pk, self.name, self.art, self.artist.name)
 
     class Meta:
         db_table = "Album"

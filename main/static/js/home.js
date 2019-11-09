@@ -17,6 +17,7 @@ function load_home() {
       res.forEach(function(item) {
         $("#recently_added").append(`
                 <div class="myxo_card album_card">
+                    <p class="path" hidden>${item.pk}</p>
                     <div class="art">
                         <img src="/static/${item.fields.art}">
                     </div>
@@ -82,6 +83,6 @@ function load_home() {
   });
 }
 
-$('#signout').on('click', function() {
-  window.location = '/signout'
-})
+$("#signout").on("click", function() {
+  window.location = "/signout";
+});
