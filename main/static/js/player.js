@@ -155,10 +155,8 @@ function shuffle() {
 
 let isPlaying = function() {
   return (
-    song &&
     song.currentTime > 0 &&
     !song.paused &&
     !song.ended &&
-    song.readyState > 2
   );
 };
