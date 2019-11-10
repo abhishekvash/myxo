@@ -98,7 +98,7 @@ function seekSong() {
 
 document.addEventListener("keydown", function(e) {
   let key = e.key;
-  if (typing == false && isPlaying == true) {
+  if (typing == false ) {
     if (key == "ArrowRight") {
       song.currentTime += 10;
     }
@@ -155,8 +155,10 @@ function shuffle() {
 
 let isPlaying = function() {
   return (
+    song &&
     song.currentTime > 0 &&
     !song.paused &&
     !song.ended &&
+    song.readyState > 2
   );
 };
