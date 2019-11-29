@@ -70,6 +70,16 @@ function updateSeekBar() {
   current_time.textContent = convertTime(c);
   seekbar.value = c;
   if (song.ended) {
+    $.ajax({
+      url: '/api/update_no_of_plays',
+      method: 'GET',
+      data: {
+        path:songs[currentSong]
+      },
+      success: function(res) {
+        console.log(res);
+      }
+    })
     next_song();
   }
 }

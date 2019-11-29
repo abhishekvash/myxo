@@ -13,6 +13,7 @@
     />
     <link rel="stylesheet" href="{% static 'css/home.css' %}" />
     <link rel="stylesheet" href="{% static 'css/album.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/artist.css' %}" />
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
     <link
       rel="stylesheet"
@@ -37,17 +38,17 @@
         <div class="row" id="home-row">
           <h3 id="home">Home</h3>
         </div>
-        <div class="row">
+        <!-- <div class="row">
           <h3>Myx</h3>
         </div>
         <div class="row link-hover">Create a Myx</div>
-        <div class="row link-hover">Join a Myx</div>
+        <div class="row link-hover">Join a Myx</div> -->
         <div class="row ">
           <h3>Favorites</h3>
         </div>
-        <div class="row link-hover">Songs</div>
-        <div class="row link-hover">Artists</div>
-        <div class="row link-hover">Albums</div>
+        <div class="row link-hover" id="toFavSongs">Songs</div>
+        <div class="row link-hover" id="toFavArtists">Artists</div>
+        <!-- <div class="row link-hover" id="toFavAlbums">Albums</div> -->
         <div class="row link-hover" id="signout">
           <h5><i class="fas fa-sign-out-alt"></i> Sign Out</h5>
         </div>

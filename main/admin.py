@@ -4,5 +4,6 @@ from main.models import *
 admin.site.register(Artist)
 admin.site.register(Album)
 admin.site.register(Song)
-admin.site.register(Favorite)
-admin.site.register(Playlist)
+admin.site.register(Favorite_Song)
+admin.site.register(Favorite_Album)
+admin.site.register(Favorite_Artist)

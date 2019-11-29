@@ -52,8 +52,8 @@
 .song {
   background: rgb(253, 253, 253);
   padding: 0.4rem 0.5rem;
-  border: 1px solid rgb(241, 241, 241);
-  box-shadow: 1px 1px 5px rgba(97, 97, 97, 0.151);
+  margin: 5px 0;
+  border: 1px solid rgb(255, 255, 255);
   .play_button {
     margin: 0.2rem 0;
     width: 23px;
@@ -70,12 +70,25 @@
     margin: 0.2rem 0;
     text-transform: capitalize;
   }
+  .artist_name_sub {
+    color: #414141;
+    font-weight: 400;
+    font-size: 0.9rem;
+    margin: 0.2rem 0;
+    text-transform: capitalize;
+  }
   .song_menu {
     margin: 0.3rem 0 0 0;
     object-fit: cover;
     height: 1rem;
-    padding:0 0.5rem;
+    padding: 0 0.5rem;
   }
+}
+
+.song:hover {
+  background: rgb(250, 250, 250);
+  border: 1.2px solid rgb(228, 228, 228);
+  box-shadow: 1px 1px 5px rgba(97, 97, 97, 0.438);
 }
 
 .m-headfoot {

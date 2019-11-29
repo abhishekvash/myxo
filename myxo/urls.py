@@ -33,8 +33,16 @@ urlpatterns = [
     path('api/recently_added', recently_added),
     path('api/search', search),
     path('api/get_album/', get_album),
+    path('api/get_artist/', get_artist),
     path('api/update_favorites/', update_favorites),
+    path('api/update_favorite_artist/', update_favorite_artist),
     path('api/confirm_favorite/', confirm_favorite),
+    path('api/confirm_favorite_artist/', confirm_favorite_artist),
+    path('api/get_favorite_songs', get_favorite_songs),
+    path('api/get_favorite_artists', get_favorite_artists),
+    path('api/get_favorite_albums', get_favorite_albums),
+    path('api/update_no_of_plays', update_no_of_plays),
+
 
     # For uploading from local db to remote db
     path('upload_artist/', upload_artists),

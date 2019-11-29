@@ -63,7 +63,7 @@ img {
 }
 
 #signout {
-  margin-top: 7rem;
+  margin-top: 6.7rem;
 }
 
 #loop {
@@ -148,6 +148,10 @@ h2 {
 
 #home-row:hover #home {
   font-size: 1.77rem;
+}
+
+.lol {
+  background-color: red;
 }
 
 .art {

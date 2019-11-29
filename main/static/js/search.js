@@ -39,6 +39,7 @@ $("#search_input").on("keyup", function() {
             result_artists.forEach(element => {
               $("#results_container").append(`
                 <div class="myxo_card mr-5 artist_card">
+                    <p class="path" hidden>${element.pk}</p>
                     <div class="art">
                         <img src="/static/${element.fields.photo}">
                     </div>

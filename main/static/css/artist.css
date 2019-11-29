@@ -1,0 +1,59 @@
+#artist_meta {
+  background-color: #fcfcfc;
+  padding: 1rem 1rem;
+  -webkit-box-shadow: 6px 5px 15px rgba(105, 105, 105, 0.315);
+          box-shadow: 6px 5px 15px rgba(105, 105, 105, 0.315);
+  margin-bottom: 3rem;
+}
+
+#artist_meta img {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#artist_meta h3 {
+  display: block;
+  color: #525252;
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 0.1rem;
+  text-transform: capitalize;
+}
+
+#artist_meta #artist_followers {
+  color: #5f5f5f;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0.3rem 0;
+}
+
+#artist_meta #follow {
+  border: none;
+  border-radius: 5px;
+  -webkit-box-shadow: 2px 2px 5px rgba(105, 105, 105, 0.315);
+          box-shadow: 2px 2px 5px rgba(105, 105, 105, 0.315);
+  margin: 0.1rem 0;
+  padding: 0.1rem 1rem;
+  background-color: rgba(0, 41, 81, 0.788);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fcfcfc;
+  text-align: center;
+}
+
+#artist_meta #follow:hover {
+  background-color: #002951;
+}
+
+#artist_meta .meta_text {
+  margin-bottom: 0.25rem;
+}
+
+.artist_page_headings {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 1.5rem;
+}
+/*# sourceMappingURL=artist.css.map */

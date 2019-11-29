@@ -69,6 +69,7 @@ def user_reg(request):
             user = User.objects.create_user(
                 username=username, email=email, password=password)
             registered = True
+
     response = {"registered": registered,
                 "user_present": user_present}
     return JsonResponse(response)
@@ -78,6 +79,20 @@ def recently_added(request):
     albums = Album.objects.raw(
         ''' SELECT * FROM "Album" ORDER BY added DESC LIMIT 10; ''')
     response = serial.serialize('json', albums, use_natural_foreign_keys=True)
+    return HttpResponse(response, content_type='application/json')
+
+
+def update_no_of_plays(request):
+    path = request.GET['path']
+    success = False
+    try:
+        cursor.execute(
+            ''' UPDATE "Song" SET no_of_plays = no_of_plays+1 WHERE path=%s ; ''', [path])
+        success = True
+    except Exception:
+        success = False
+    response = {'success': success}
+    response = json.dumps(response)
     return HttpResponse(response, content_type='application/json')
 
 
@@ -114,21 +129,38 @@ def get_album(request):
     return HttpResponse(response, content_type='application/json')
 
 
+def get_artist(request):
+    artist_id = int(request.GET['artist_id'])
+    artist = Artist.objects.raw('''
+    SELECT * FROM "Artist" WHERE id = %s ''', [artist_id])
+    album = Album.objects.raw('''
+    SELECT * FROM "Album" WHERE artist_id = %s  ''', [artist_id])
+    song = Song.objects.raw('''
+    SELECT * FROM "Song" WHERE album_id in (SELECT id FROM "Album" WHERE artist_id = %s) ORDER BY no_of_plays DESC LIMIT 10 ;''', [artist_id])
+    response1 = serial.serialize('json', artist, use_natural_foreign_keys=True)
+    response2 = serial.serialize('json', song, use_natural_foreign_keys=True)
+    response3 = serial.serialize('json', album, use_natural_foreign_keys=True)
+    response = {"artist": response1, "songs": response2, "albums": response3}
+    response = json.dumps(response)
+    return HttpResponse(response, content_type='application/json')
+
+
 def update_favorites(request):
     no_fav = False
+    add_to_favorites = False
     try:
         add_to_favorites = request.POST['add_to_fav']
     except Exception:
         no_fav = True
     user_id = int(request.user.pk)
     song_pk = int(request.POST['song_pk'])
-    favorite = Favorite.objects.raw(
-        ''' SELECT * FROM "Favorites" WHERE song_id = %s AND user_id = %s ; ''', [song_pk, user_id])
+    favorite = Favorite_Song.objects.raw(
+        ''' SELECT * FROM "Favorite_Song" WHERE song_id = %s AND user_id = %s ; ''', [song_pk, user_id])
     if len(favorite) == 0 and add_to_favorites == 'on':
-        cursor.execute(''' INSERT INTO "Favorites"(user_id, song_id) VALUES(%s, %s); ''', [
+        cursor.execute(''' INSERT INTO "Favorite_Song"(user_id, song_id) VALUES(%s, %s); ''', [
             user_id, song_pk])
     if len(favorite) > 0 and no_fav is True:
-        cursor.execute(''' DELETE FROM "Favorites" WHERE user_id = %s AND song_id = %s ; ''', [
+        cursor.execute(''' DELETE FROM "Favorite_Song" WHERE user_id = %s AND song_id = %s ; ''', [
             user_id, song_pk])
     return HttpResponse('ok')
 
@@ -137,14 +169,66 @@ def confirm_favorite(request):
     is_favorite = False
     user_id = int(request.user.pk)
     song_pk = int(request.GET['song_pk'])
-    favorite = Favorite.objects.raw(
-        ''' SELECT * FROM "Favorites" WHERE song_id = %s AND user_id = %s ; ''', [song_pk, user_id])
+    favorite = Favorite_Song.objects.raw(
+        ''' SELECT * FROM "Favorite_Song" WHERE song_id = %s AND user_id = %s ; ''', [song_pk, user_id])
     if len(favorite) == 0:
         is_favorite = False
     else:
         is_favorite = True
     response = {"is_favorite": is_favorite}
     return JsonResponse(response)
+
+
+def confirm_favorite_artist(request):
+    is_favorite = False
+    user_id = int(request.user.pk)
+    artist_id = int(request.GET['artist_id'])
+    favorite = Favorite_Artist.objects.raw(
+        ''' SELECT * FROM "Favorite_Artist" WHERE artist_id = %s AND user_id = %s ; ''', [artist_id, user_id])
+    if len(favorite) == 0:
+        print(len(favorite))
+        is_favorite = False
+    else:
+        print(len(favorite))
+        is_favorite = True
+    response = {"is_favorite": is_favorite}
+    return JsonResponse(response)
+
+
+def update_favorite_artist(request):
+    is_favorite = False
+    user_id = int(request.user.pk)
+    artist_id = int(request.GET['artist_id'])
+    favorite = Favorite_Artist.objects.raw(
+        ''' SELECT * FROM "Favorite_Artist" WHERE artist_id = %s AND user_id = %s ; ''', [artist_id, user_id])
+    if len(favorite) == 0:
+        cursor.execute(''' INSERT INTO "Favorite_Artist"(user_id, artist_id) VALUES(%s,%s) ''', [
+                       user_id, artist_id])
+    else:
+        cursor.execute(''' DELETE FROM "Favorite_Artist" WHERE user_id= %s AND artist_id = %s ''', [
+                       user_id, artist_id])
+    artist = Artist.objects.raw(
+        ''' SELECT * FROM "Artist" WHERE id = %s ''', [artist_id])
+    response = {'followers': artist[0].followers}
+    response = json.dumps(response)
+    return HttpResponse(response, content_type='application/json')
+
+
+def get_favorite_songs(request):
+    user_id = int(request.user.pk)
+    favorite_songs = Song.objects.raw(
+        ''' SELECT * FROM "Song" WHERE id in (SELECT song_id FROM "Favorite_Song" WHERE user_id = %s) ''', [user_id])
+    response = serial.serialize(
+        'json', favorite_songs, use_natural_foreign_keys=True)
+    return HttpResponse(response, content_type='application/json')
+
+
+def get_favorite_albums(request):
+    return HttpResponse('Albums')
+
+
+def get_favorite_artists(request):
+    return HttpResponse('Artists')
 
 
 # For uploading from local db to remote db
