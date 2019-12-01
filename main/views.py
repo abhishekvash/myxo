@@ -8,7 +8,6 @@ from django.db import connection
 import json
 import requests
 from main.models import *
-cursor = connection.cursor()
 
 
 def signin(request):
@@ -83,17 +82,18 @@ def recently_added(request):
 
 
 def update_no_of_plays(request):
-    path = request.GET['path']
-    success = False
-    try:
-        cursor.execute(
-            ''' UPDATE "Song" SET no_of_plays = no_of_plays+1 WHERE path=%s ; ''', [path])
-        success = True
-    except Exception:
+    with connection.cursor() as cursor:
+        path = request.GET['path']
         success = False
-    response = {'success': success}
-    response = json.dumps(response)
-    return HttpResponse(response, content_type='application/json')
+        try:
+            cursor.execute(
+                ''' UPDATE "Song" SET no_of_plays = no_of_plays+1 WHERE path=%s ; ''', [path])
+            success = True
+        except Exception:
+            success = False
+        response = {'success': success}
+        response = json.dumps(response)
+        return HttpResponse(response, content_type='application/json')
 
 
 def search(request):
@@ -146,23 +146,24 @@ def get_artist(request):
 
 
 def update_favorites(request):
-    no_fav = False
-    add_to_favorites = False
-    try:
-        add_to_favorites = request.POST['add_to_fav']
-    except Exception:
-        no_fav = True
-    user_id = int(request.user.pk)
-    song_pk = int(request.POST['song_pk'])
-    favorite = Favorite_Song.objects.raw(
-        ''' SELECT * FROM "Favorite_Song" WHERE song_id = %s AND user_id = %s ; ''', [song_pk, user_id])
-    if len(favorite) == 0 and add_to_favorites == 'on':
-        cursor.execute(''' INSERT INTO "Favorite_Song"(user_id, song_id) VALUES(%s, %s); ''', [
-            user_id, song_pk])
-    if len(favorite) > 0 and no_fav is True:
-        cursor.execute(''' DELETE FROM "Favorite_Song" WHERE user_id = %s AND song_id = %s ; ''', [
-            user_id, song_pk])
-    return HttpResponse('ok')
+    with connection.cursor() as cursor:
+        no_fav = False
+        add_to_favorites = False
+        try:
+            add_to_favorites = request.POST['add_to_fav']
+        except Exception:
+            no_fav = True
+        user_id = int(request.user.pk)
+        song_pk = int(request.POST['song_pk'])
+        favorite = Favorite_Song.objects.raw(
+            ''' SELECT * FROM "Favorite_Song" WHERE song_id = %s AND user_id = %s ; ''', [song_pk, user_id])
+        if len(favorite) == 0 and add_to_favorites == 'on':
+            cursor.execute(''' INSERT INTO "Favorite_Song"(user_id, song_id) VALUES(%s, %s); ''', [
+                user_id, song_pk])
+        if len(favorite) > 0 and no_fav is True:
+            cursor.execute(''' DELETE FROM "Favorite_Song" WHERE user_id = %s AND song_id = %s ; ''', [
+                user_id, song_pk])
+        return HttpResponse('ok')
 
 
 def confirm_favorite(request):
@@ -196,22 +197,23 @@ def confirm_favorite_artist(request):
 
 
 def update_favorite_artist(request):
-    is_favorite = False
-    user_id = int(request.user.pk)
-    artist_id = int(request.GET['artist_id'])
-    favorite = Favorite_Artist.objects.raw(
-        ''' SELECT * FROM "Favorite_Artist" WHERE artist_id = %s AND user_id = %s ; ''', [artist_id, user_id])
-    if len(favorite) == 0:
-        cursor.execute(''' INSERT INTO "Favorite_Artist"(user_id, artist_id) VALUES(%s,%s) ''', [
-                       user_id, artist_id])
-    else:
-        cursor.execute(''' DELETE FROM "Favorite_Artist" WHERE user_id= %s AND artist_id = %s ''', [
-                       user_id, artist_id])
-    artist = Artist.objects.raw(
-        ''' SELECT * FROM "Artist" WHERE id = %s ''', [artist_id])
-    response = {'followers': artist[0].followers}
-    response = json.dumps(response)
-    return HttpResponse(response, content_type='application/json')
+    with connection.cursor() as cursor:
+        is_favorite = False
+        user_id = int(request.user.pk)
+        artist_id = int(request.GET['artist_id'])
+        favorite = Favorite_Artist.objects.raw(
+            ''' SELECT * FROM "Favorite_Artist" WHERE artist_id = %s AND user_id = %s ; ''', [artist_id, user_id])
+        if len(favorite) == 0:
+            cursor.execute(''' INSERT INTO "Favorite_Artist"(user_id, artist_id) VALUES(%s,%s) ''', [
+                        user_id, artist_id])
+        else:
+            cursor.execute(''' DELETE FROM "Favorite_Artist" WHERE user_id= %s AND artist_id = %s ''', [
+                        user_id, artist_id])
+        artist = Artist.objects.raw(
+            ''' SELECT * FROM "Artist" WHERE id = %s ''', [artist_id])
+        response = {'followers': artist[0].followers}
+        response = json.dumps(response)
+        return HttpResponse(response, content_type='application/json')
 
 
 def get_favorite_songs(request):

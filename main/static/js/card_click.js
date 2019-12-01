@@ -239,6 +239,7 @@ function album_clicked() {
 }
 
 $("#top_hits").on("click", function() {
+  console.log("top10");
   $("#content").empty();
   $.ajax({
     method: "GET",
