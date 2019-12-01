@@ -40,7 +40,6 @@ urlpatterns = [
     path('api/confirm_favorite_artist/', confirm_favorite_artist),
     path('api/get_favorite_songs', get_favorite_songs),
     path('api/get_favorite_artists', get_favorite_artists),
-    path('api/get_favorite_albums', get_favorite_albums),
     path('api/update_no_of_plays', update_no_of_plays),
 
 

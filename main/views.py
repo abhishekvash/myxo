@@ -223,12 +223,13 @@ def get_favorite_songs(request):
     return HttpResponse(response, content_type='application/json')
 
 
-def get_favorite_albums(request):
-    return HttpResponse('Albums')
-
-
 def get_favorite_artists(request):
-    return HttpResponse('Artists')
+    user_id = int(request.user.pk)
+    favorite_albums = Artist.objects.raw(
+        ''' SELECT * FROM "Artist" WHERE id in (SELECT artist_id FROM "Favorite_Artist" WHERE user_id = %s) ''', [user_id])
+    response = serial.serialize(
+        'json', favorite_albums, use_natural_foreign_keys=True)
+    return HttpResponse(response, content_type='application/json')
 
 
 # For uploading from local db to remote db

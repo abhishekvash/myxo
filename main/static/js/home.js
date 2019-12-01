@@ -141,17 +141,22 @@ $("#toFavArtists").on("click", function() {
     method: "GET",
     url: "/api/get_favorite_artists",
     success: function(res) {
-      console.log(res);
-    }
-  });
-});
-
-$("#toFavAlbums").on("click", function() {
-  $.ajax({
-    method: "GET",
-    url: "/api/get_favorite_albums",
-    success: function(res) {
-      console.log(res);
+      $("#content").empty();
+      $("#content").append(`
+              <h2 class='mb-4'>Favorite Artists</h2>
+              <div id="artists_container" class='row'></div>
+              `);
+      res.forEach(element => {
+        $("#artists_container").append(`
+                <div class="myxo_card mr-5 artist_card">
+                    <p class="path" hidden>${element.pk}</p>
+                    <div class="art">
+                        <img src="/static/${element.fields.photo}">
+                    </div>
+                    <p class="album_name">${element.fields.name}</p>
+                </div>
+                `);
+      });
     }
   });
 });
