@@ -238,6 +238,58 @@ function album_clicked() {
   });
 }
 
+$("#top_hits").on("click", function() {
+  $("#content").empty();
+  $.ajax({
+    method: "GET",
+    url: "/api/get_top_hits",
+    success: function(res) {
+      $("#content").append(`
+              <h2 class='mb-4'>Myxo Top 10</h2>
+              <div id="songs_container"></div>
+              `);
+      res.forEach((element, index) => {
+        paths_array.push(element.fields.path);
+        let time = element.fields.duration.split(":");
+        $("#songs_container").append(`
+                <div class="song">
+                <p hidden>${index}</p>
+                <p2 hidden>${element.fields.path}</p2>
+                <p3 hidden>${element.pk}</p3>
+                  <div class="row">
+                    <div class="col-1">
+                      <img src="/static/assets/player-icons/play_playlist.png" alt="" srcset="" class="play_button">
+                    </div>
+                    <div class="col-9">
+                    <div class="row">
+                      <p class="song_name">${element.fields.name}</p>
+                    </div>
+                    <div row="row">
+                      <p class="artist_name_sub">${element.fields.album[3]}</p>
+                    </div>
+                    </div>
+                    <div class="col-1">
+                      <p class="song_duration">${time[1]}:${time[2]}</p>
+                    </div>
+                    <div class="col-1">
+                      <img src="/static/assets/player-icons/song_menu.png" alt="" srcset="" class="song_menu">
+                    </div>
+                  </div>
+                </div>
+        `);
+      });
+    }
+  });
+});
+
+$("#rock_hits").on("click", function(event) {
+  console.log("rock hits");
+});
+
+$("#pop_hits").on("click", function(event) {
+  console.log("pop hits");
+});
+
 $("#song_menu_done").on("click", function(event) {
   if (favorite_songs_page == true) {
     if ($("#to_queue").prop("checked") == false) {

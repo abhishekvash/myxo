@@ -41,6 +41,7 @@ urlpatterns = [
     path('api/get_favorite_songs', get_favorite_songs),
     path('api/get_favorite_artists', get_favorite_artists),
     path('api/update_no_of_plays', update_no_of_plays),
+    path('api/get_top_hits', get_top_hits),
 
 
     # For uploading from local db to remote db

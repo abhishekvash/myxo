@@ -223,6 +223,15 @@ def get_favorite_songs(request):
     return HttpResponse(response, content_type='application/json')
 
 
+def get_top_hits(request):
+    user_id = int(request.user.pk)
+    favorite_songs = Song.objects.raw(
+        ''' SELECT * FROM "Song" ORDER BY no_of_plays DESC LIMIT 10''')
+    response = serial.serialize(
+        'json', favorite_songs, use_natural_foreign_keys=True)
+    return HttpResponse(response, content_type='application/json')
+
+
 def get_favorite_artists(request):
     user_id = int(request.user.pk)
     favorite_albums = Artist.objects.raw(
