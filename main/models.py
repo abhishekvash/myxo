@@ -100,9 +100,9 @@ class Favorite_Artist(models.Model):
         db_table = "Favorite_Artist"
 
 
-class Favorite_Album(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+# class Favorite_Album(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     album = models.ForeignKey(Album, on_delete=models.CASCADE)
 
-    class Meta:
-        db_table = "Favorite_Album"
+#     class Meta:
+#         db_table = "Favorite_Album"
